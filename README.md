@@ -18,7 +18,7 @@ py.test verify_test.py
 
 Have the following import in your script
 ```python
-from master_qa import MasterQA
+from masterqa import MasterQA
 ```
 
 Have the test class import ``MasterQA``.
