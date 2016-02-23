@@ -1,0 +1,3 @@
+seleniumbase==1.1.34
+flake8==2.5.4
+-e .
