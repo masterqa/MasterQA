@@ -5,7 +5,7 @@ MasterQA allows testers to quickly verify web pages while assisted by automation
 
 ### Run the example test:
 ```bash
-pip install seleniumbase
+pip install masterqa
 
 git clone https://github.com/mdmintz/MasterQA.git
 
