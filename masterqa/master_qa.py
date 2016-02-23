@@ -6,14 +6,15 @@ import time
 from seleniumbase import BaseCase
 from selenium.webdriver.remote.errorhandler import NoAlertPresentException
 from style_sheet import style
-import master_settings
+from masterqa import settings
 
 LATEST_REPORT_DIR = "latest_report"
 ARCHIVE_DIR = "report_archives"
 RESULTS_PAGE = "results.html"
 BAD_PAGE_LOG = "results_table.csv"
-DEFAULT_VALIDATION_MESSAGE = master_settings.DEFAULT_VALIDATION_MESSAGE
-WAIT_TIME_BEFORE_VERIFY = master_settings.WAIT_TIME_BEFORE_VERIFY
+DEFAULT_VALIDATION_MESSAGE = settings.DEFAULT_VALIDATION_MESSAGE
+WAIT_TIME_BEFORE_VERIFY = settings.WAIT_TIME_BEFORE_VERIFY
+START_IN_FULL_SCREEN_MODE = settings.START_IN_FULL_SCREEN_MODE
 
 # This tool allows testers to quickly verify pages while assisted by automation
 
@@ -273,6 +274,8 @@ class MasterQA(__MasterQATestCase__):
     def setUp(self):
         super(__MasterQATestCase__, self).setUp()
         self.manual_check_setup()
+        if START_IN_FULL_SCREEN_MODE:
+            self.maximize_window()
 
     def verify(self, *args):
         self.manual_page_check(*args)
