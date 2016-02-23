@@ -1,4 +1,4 @@
-from master_qa import MasterQA
+from masterqa import MasterQA
 
 
 class MasterQATests(MasterQA):
