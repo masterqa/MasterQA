@@ -176,13 +176,14 @@ class __MasterQATestCase__(BaseCase):
         f.close()
         return results_file
 
-    def process_manual_check_results(self):
+    def process_manual_check_results(self, auto_close_results_page=False):
         perfection = True
         failures_count = self.manual_check_count - self.manual_check_successes
+        print "\n\n*** Test Result: ***"
         if self.manual_check_successes == self.manual_check_count:
             pass
         else:
-            print "WARNING!!! Page issues were detected by humans!"
+            print "WARNING!!! There were page issues detected!"
             perfection = False
 
         if self.incomplete_runs > 0:
@@ -190,7 +191,7 @@ class __MasterQATestCase__(BaseCase):
             perfection = False
 
         if perfection:
-            print "Success!!! All pages are good!"
+            print "SUCCESS!!! Everything checks out OKAY!"
         else:
             pass
         self.add_bad_page_log_file()  # Includes successful results
@@ -264,14 +265,20 @@ class __MasterQATestCase__(BaseCase):
         results_file = self.add_results_page(new_source)
         archived_results_file = log_path + '/' + RESULTS_PAGE
         shutil.copyfile(results_file, archived_results_file)
-        print "Results located at: " + results_file
+        print "\n*** The results html page is located at: ***\n" + results_file
         self.open("file://%s" % archived_results_file)
-        ipdb.set_trace()
+        if auto_close_results_page:
+            # Long enough to notice the results before closing the page
+            time.sleep(WAIT_TIME_BEFORE_VERIFY)
+        else:
+            # The user can decide when to close the results page
+            ipdb.set_trace()
 
 
 class MasterQA(__MasterQATestCase__):
 
     def setUp(self):
+        self.auto_close_results_page = False
         super(__MasterQATestCase__, self).setUp()
         self.manual_check_setup()
         if START_IN_FULL_SCREEN_MODE:
@@ -280,8 +287,16 @@ class MasterQA(__MasterQATestCase__):
     def verify(self, *args):
         self.manual_page_check(*args)
 
+    def auto_close_results(self):
+        ''' If this method is called, the results page will automatically close
+        at the end of the test run, rather than sending the user into ipdb mode
+        where the user can close the results page manually by entering "c" into
+        the command prompt's terminal window.
+        '''
+        self.auto_close_results_page = True
+
     def tearDown(self):
         if sys.exc_info()[1]:
             self.add_failure(sys.exc_info()[1])
-        self.process_manual_check_results()
+        self.process_manual_check_results(self.auto_close_results_page)
         super(__MasterQATestCase__, self).tearDown()
