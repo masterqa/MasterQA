@@ -1,7 +1,7 @@
 # MasterQA
+[![pypi](https://img.shields.io/pypi/v/masterqa.svg)](https://pypi.python.org/pypi/seleniumbase) [![Build Status](https://travis-ci.org/mdmintz/MasterQA.svg?branch=master)](https://travis-ci.org/mdmintz/SeleniumBase)
 
-### Acceptance Testing Tool
-MasterQA allows testers to quickly verify web pages while assisted by automation.
+An automation-powered acceptance testing tool that allows users to quickly verify web pages.
 
 ### Run the example test:
 ```bash
@@ -21,7 +21,7 @@ Have the following import in your script
 from masterqa import MasterQA
 ```
 
-Have the test class import ``MasterQA``.
+The have the test class import ``MasterQA``.
 
 Write tests as you would normally with SeleniumBase.
 
