@@ -25,7 +25,7 @@ from masterqa import MasterQA
 
 Then have the test class import ``MasterQA``.
 
-Write tests as you would normally with SeleniumBase.
+Write tests as you would normally with [SeleniumBase](http://seleniumbase.com).
 
 To do manual verification, add a ``self.verify()`` after each part of the script that needs manual verification. If you want to include a custom question, add text inside that call (in quotes).
 
