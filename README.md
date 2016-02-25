@@ -1,5 +1,5 @@
 # MasterQA
-[![pypi](https://img.shields.io/pypi/v/masterqa.svg)](https://pypi.python.org/pypi/seleniumbase) [![Build Status](https://travis-ci.org/mdmintz/MasterQA.svg?branch=master)](https://travis-ci.org/mdmintz/SeleniumBase)
+[![pypi](https://img.shields.io/pypi/v/masterqa.svg)](https://pypi.python.org/pypi/masterqa) [![Build Status](https://travis-ci.org/mdmintz/MasterQA.svg?branch=master)](https://travis-ci.org/mdmintz/MasterQA)
 
 An automation-assisted manual testing tool that allows users to visually verify web pages after automation does the real work for them.
 
