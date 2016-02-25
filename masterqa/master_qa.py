@@ -15,6 +15,7 @@ BAD_PAGE_LOG = "results_table.csv"
 DEFAULT_VALIDATION_MESSAGE = settings.DEFAULT_VALIDATION_MESSAGE
 WAIT_TIME_BEFORE_VERIFY = settings.WAIT_TIME_BEFORE_VERIFY
 START_IN_FULL_SCREEN_MODE = settings.START_IN_FULL_SCREEN_MODE
+MAX_IDLE_TIME_BEFORE_QUIT = settings.MAX_IDLE_TIME_BEFORE_QUIT
 
 # This tool allows testers to quickly verify pages while assisted by automation
 
@@ -109,7 +110,7 @@ class __MasterQATestCase__(BaseCase):
                     "*"))
             return 0
 
-    def wait_for_special_alert_absent(self, timeout=300):
+    def wait_for_special_alert_absent(self, timeout=MAX_IDLE_TIME_BEFORE_QUIT):
         for x in range(int(timeout * 20)):
             try:
                 alert = self.driver.switch_to_alert()
@@ -119,6 +120,7 @@ class __MasterQATestCase__(BaseCase):
                 time.sleep(0.05)
             except NoAlertPresentException:
                 return
+        self.driver.quit()
         raise Exception(
             "%s seconds passed without human action! Stopping..." % timeout)
 
