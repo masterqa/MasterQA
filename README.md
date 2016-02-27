@@ -3,7 +3,7 @@
 
 An automation-assisted manual testing tool that allows users to visually verify web pages after automation does the real work for them.
 
-![](http://cdn2.hubspot.net/hubfs/100006/images/verify_results.png "MasterQA")
+![](http://cdn2.hubspot.net/hubfs/100006/images/mqa_verify_results.png "MasterQA")
 
 ### Run the example test:
 ```bash
