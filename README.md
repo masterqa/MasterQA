@@ -13,7 +13,7 @@ git clone https://github.com/mdmintz/MasterQA.git
 
 cd MasterQA/examples
 
-py.test verify_test.py  # (This defaults to Firefox)
+nosetests verify_test.py  # (This defaults to Firefox)
 ```
 
 ### How to write your own test scripts:
