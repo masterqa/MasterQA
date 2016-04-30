@@ -18,7 +18,7 @@ nosetests verify_test.py  # (This defaults to Firefox)
 
 ### How to write your own test scripts:
 
-[You can follow the example script to learn how](https://github.com/mdmintz/MasterQA/blob/master/examples/verify_test.py).
+Follow the [example script](https://github.com/mdmintz/MasterQA/blob/master/examples/verify_test.py) to learn how.
 
 Have the following import in your script:
 ```python
