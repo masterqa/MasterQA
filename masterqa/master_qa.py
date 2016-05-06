@@ -256,8 +256,8 @@ class __MasterQATestCase__(BaseCase):
                 line = line.replace('"', '')
                 new_view_3 += '<tr><td>%s</tr>\n' % line
         new_view_3 += '</tbody></table>'
-        new_view_4 = '''<h2 style="color:#0C8CDB; font-size:27px;">
-            *** Powered by SeleniumBase ***</h2>'''
+        new_view_4 = '''<h3 style="color:#0C8CDB; font-size:27px;">
+            MasterQA is powered by SeleniumBase</h3>'''
         new_view = '%s%s%s%s' % (
             new_view_1, new_view_2, new_view_3, new_view_4)
         results_content = '<body>%s</body>' % new_view
