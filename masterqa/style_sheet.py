@@ -1,6 +1,7 @@
-style = '''<meta id="OGTitle" property="og:title" content="Master QA">
-        <title>MasterQA - Results</title>
-        <link rel="SHORTCUT ICON" href="../../favicon.ico" />
+style = '''<meta id="OGTitle" property="og:title" content="SeleniumBase">
+        <title>Test Results</title>
+        <link rel="SHORTCUT ICON"
+        href="http://cdn2.hubspot.net/hubfs/100006/images/results_logo3.ico" />
         <style type="text/css">
         html {
             background-color: #9988ad;
