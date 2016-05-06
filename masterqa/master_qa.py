@@ -1,4 +1,3 @@
-import ipdb
 import os
 import shutil
 import sys
@@ -274,7 +273,9 @@ class __MasterQATestCase__(BaseCase):
             time.sleep(WAIT_TIME_BEFORE_VERIFY)
         else:
             # The user can decide when to close the results page
-            ipdb.set_trace()
+            print "\n*** Close the html report window to continue ***"
+            while len(self.driver.window_handles):
+                time.sleep(0.1)
 
 
 class MasterQA(__MasterQATestCase__):
@@ -291,9 +292,8 @@ class MasterQA(__MasterQATestCase__):
 
     def auto_close_results(self):
         ''' If this method is called, the results page will automatically close
-        at the end of the test run, rather than sending the user into ipdb mode
-        where the user can close the results page manually by entering "c" into
-        the command prompt's terminal window.
+        at the end of the test run, rather than waiting on the user to close
+        the results page manually.
         '''
         self.auto_close_results_page = True
 
