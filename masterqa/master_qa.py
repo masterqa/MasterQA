@@ -2,9 +2,9 @@ import os
 import shutil
 import sys
 import time
-from seleniumbase import BaseCase
 from selenium.webdriver.remote.errorhandler import NoAlertPresentException
-from style_sheet import style
+from seleniumbase import BaseCase
+from seleniumbase.core.style_sheet import style
 from masterqa import settings
 
 LATEST_REPORT_DIR = "latest_report"
