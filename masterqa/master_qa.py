@@ -213,7 +213,6 @@ class __MasterQATestCase__(BaseCase):
             ir_color = "#EE3A3A"
 
         new_data = '''<div><table><thead><tr><th>TEST REPORT SUMMARY
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </th><th></th></tr></thead><tbody>
               <tr style="color:#00BB00"><td>CHECKS PASSED: <td>%s</tr>
               <tr style="color:%s"><td>CHECKS FAILED: <td>%s</tr>
