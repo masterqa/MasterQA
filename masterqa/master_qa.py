@@ -212,12 +212,14 @@ class __MasterQATestCase__(BaseCase):
         if self.incomplete_runs > 0:
             ir_color = "#EE3A3A"
 
-        new_data = '''<div><table><thead><tr><th>TEST REPORT SUMMARY
-              </th><th></th></tr></thead><tbody>
+        summary_table = '''<div><table><thead><tr>
+              <th>TEST REPORT SUMMARY</th>
+              <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+              </tr></thead><tbody>
               <tr style="color:#00BB00"><td>CHECKS PASSED: <td>%s</tr>
-              <tr style="color:%s"><td>CHECKS FAILED: <td>%s</tr>
+              <tr style="color:%s"     ><td>CHECKS FAILED: <td>%s</tr>
               <tr style="color:#4D4DDD"><td>TOTAL VERIFICATIONS: <td>%s</tr>
-              <tr style="color:%s"><td>INCOMPLETE TEST RUNS: <td>%s</tr>
+              <tr style="color:%s"     ><td>INCOMPLETE TEST RUNS: <td>%s</tr>
               </tbody></table>''' % (self.manual_check_successes,
                                      tf_color,
                                      failures_count,
@@ -225,27 +227,27 @@ class __MasterQATestCase__(BaseCase):
                                      ir_color,
                                      self.incomplete_runs)
 
-        new_view_1 = '''<h1 id="ContextHeader" class="sectionHeader" title="">
-                     %s</h1>''' % new_data
+        summary_table = '''<h1 id="ContextHeader" class="sectionHeader" title="">
+                     %s</h1>''' % summary_table
 
         log_link_shown = '../%s%s/' % (
             ARCHIVE_DIR, web_log_path.split(ARCHIVE_DIR)[1])
         csv_link = '%s/%s' % (web_log_path, BAD_PAGE_LOG)
         csv_link_shown = '%s' % BAD_PAGE_LOG
-        new_view_2 = '''<p><p><p><p><h2><table><tbody>
+        log_table = '''<p><p><p><p><h2><table><tbody>
             <tr><td>LOG FILES LINK:&nbsp;&nbsp;<td><a href="%s">%s</a></tr>
             <tr><td>RESULTS TABLE:&nbsp;&nbsp;<td><a href="%s">%s</a></tr>
             </tbody></table></h2><p><p><p><p>''' % (
             web_log_path, log_link_shown, csv_link, csv_link_shown)
 
-        new_view_3 = '<h2><table><tbody></div>'
+        failure_table = '<h2><table><tbody></div>'
         any_screenshots = False
         for line in self.page_results_list:
             line = line.split(',')
             if line[1] == '"FAILED!"' or line[1] == '"ERROR!"':
                 if not any_screenshots:
                     any_screenshots = True
-                    new_view_3 += '''<thead><tr><th>SCREENSHOT FILE
+                    failure_table += '''<thead><tr><th>SCREENSHOT FILE
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </th><th>LOCATION OF FAILURE</th></tr></thead>'''
                 line = '<a href="%s">%s</a>' % (
@@ -253,16 +255,15 @@ class __MasterQATestCase__(BaseCase):
                     &nbsp;&nbsp;<td>
                     ''' + '<a href="%s">%s</a>' % (line[3], line[3])
                 line = line.replace('"', '')
-                new_view_3 += '<tr><td>%s</tr>\n' % line
-        new_view_3 += '</tbody></table>'
-        new_view_4 = '''<h3 style="color:#0C8CDB; font-size:22px;">
+                failure_table += '<tr><td>%s</tr>\n' % line
+        failure_table += '</tbody></table>'
+        powered_by = '''<h3 style="color:#0C8CDB; font-size:22px;">
             MasterQA is powered by SeleniumBase</h3>'''
-        new_view = '%s%s%s%s' % (
-            new_view_1, new_view_2, new_view_3, new_view_4)
-        results_content = '<body>%s</body>' % new_view
-        new_source = '<html><head>%s</head>%s</html>' % (
-            style, results_content)
-        results_file = self.add_results_page(new_source)
+        table_view = '%s%s%s%s' % (
+            summary_table, log_table, failure_table, powered_by)
+        report_html = '<html><head>%s</head><body>%s</body></html>' % (
+            style, table_view)
+        results_file = self.add_results_page(report_html)
         archived_results_file = log_path + '/' + RESULTS_PAGE
         shutil.copyfile(results_file, archived_results_file)
         print "\n*** The results html page is located at: ***\n" + results_file
