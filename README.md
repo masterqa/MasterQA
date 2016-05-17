@@ -16,19 +16,40 @@ cd MasterQA/examples
 nosetests verify_test.py  # (This defaults to Firefox)
 ```
 
-### How to write your own test scripts:
+### Follow the [example](https://github.com/mdmintz/MasterQA/blob/master/examples/verify_test.py) to write your own tests:
 
-Follow the [example script](https://github.com/mdmintz/MasterQA/blob/master/examples/verify_test.py) to learn how.
-
-Have the following import in your script:
 ```python
 from masterqa import MasterQA
+
+class MasterQATests(MasterQA):
+
+    def test_xkcd(self):
+        self.open("http://xkcd.com/1512/")
+        self.click('a[rel="next"]')
+        self.verify()
+        self.open("http://xkcd.com/1520/")
+        for i in range(2):
+            self.click('a[rel="next"]')
+        self.verify("Can you find the moon?")
+        self.click('a[rel="next"]')
+        self.verify("Do the drones look safe?")
+        self.click_link_text('Blag')
+        self.update_text("input#s", "Robots!\n")
+        self.verify("Does it say 'Hooray robots' on the page?")
+        self.open("http://xkcd.com/213/")
+        for i in range(5):
+            self.click('a[rel="prev"]')
+        self.verify("Does the page say 'Abnormal Expressions'?")
 ```
 
-Then have the test class import ``MasterQA``.
+You'll notice that tests are written based on [SeleniumBase](http://seleniumbase.com), with the key difference of using a different import: ``from masterqa import MasterQA`` rather than ``from seleniumbase import BaseCase``. Now the test class will import ``MasterQA`` instead of ``BaseCase``.
 
-Write tests as you would normally with [SeleniumBase](http://seleniumbase.com).
+To add a manual verification step, use ``self.verify()`` in the code after each part of the script that needs manual verification. If you want to include a custom question, add text inside that call (in quotes). Example:
 
-To do manual verification, add a ``self.verify()`` after each part of the script that needs manual verification. If you want to include a custom question, add text inside that call (in quotes).
+```python
+self.verify()
 
-Type ``c`` and hit enter on the command prompt when you're ready to exit the Results Page (the script is in ipdb mode at this point).
+self.verify("Can you find the moon?")
+```
+
+MasterQA is powered by [SeleniumBase](http://seleniumbase.com), the most advanced open-source automation platform on the [Planet](https://en.wikipedia.org/wiki/Earth).
