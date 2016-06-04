@@ -6,7 +6,7 @@ from setuptools import setup, find_packages  # noqa
 
 setup(
     name='masterqa',
-    version='1.0.13',
+    version='1.0.14',
     url='http://masterqa.com',
     author='Michael Mintz',
     author_email='@mintzworld',
