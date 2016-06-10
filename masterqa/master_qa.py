@@ -213,7 +213,7 @@ class __MasterQATestCase__(BaseCase):
             ir_color = "#EE3A3A"
 
         summary_table = '''<div><table><thead><tr>
-              <th>TEST REPORT SUMMARY</th>
+              <th>TESTING SUMMARY</th>
               <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
               </tr></thead><tbody>
               <tr style="color:#00BB00"><td>CHECKS PASSED: <td>%s</tr>
