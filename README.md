@@ -13,10 +13,10 @@ git clone https://github.com/mdmintz/MasterQA.git
 
 cd MasterQA/examples
 
-nosetests verify_test.py  # (This defaults to Firefox)
+nosetests masterqa_test.py  # (This defaults to Firefox)
 ```
 
-### Follow the [example](https://github.com/mdmintz/MasterQA/blob/master/examples/verify_test.py) to write your own tests:
+### Follow the [example](https://github.com/mdmintz/MasterQA/blob/master/examples/masterqa_test.py) to write your own tests:
 
 ```python
 from masterqa import MasterQA
@@ -25,10 +25,13 @@ class MasterQATests(MasterQA):
 
     def test_xkcd(self):
         self.open("http://xkcd.com/1512/")
-        self.click('a[rel="next"]')
+        for i in xrange(4):
+            self.click('a[rel="next"]')
+        for i in xrange(3):
+            self.click('a[rel="prev"]')
         self.verify()
         self.open("http://xkcd.com/1520/")
-        for i in range(2):
+        for i in xrange(2):
             self.click('a[rel="next"]')
         self.verify("Can you find the moon?")
         self.click('a[rel="next"]')
@@ -37,7 +40,7 @@ class MasterQATests(MasterQA):
         self.update_text("input#s", "Robots!\n")
         self.verify("Does it say 'Hooray robots' on the page?")
         self.open("http://xkcd.com/213/")
-        for i in range(5):
+        for i in xrange(5):
             self.click('a[rel="prev"]')
         self.verify("Does the page say 'Abnormal Expressions'?")
 ```
