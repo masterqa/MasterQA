@@ -1,9 +1,11 @@
 # MasterQA
 [![pypi](https://img.shields.io/pypi/v/masterqa.svg)](https://pypi.python.org/pypi/masterqa) [![Build Status](https://travis-ci.org/mdmintz/MasterQA.svg?branch=master)](https://travis-ci.org/mdmintz/MasterQA)
 
-An automation-assisted manual testing tool that allows users to visually verify web pages after automation does the real work for them.
+MasterQA allows users to visually verify web pages after automation does the real work for them.
 
-![](http://cdn2.hubspot.net/hubfs/100006/images/mqa_verify_results.png "MasterQA")
+## (NOTE: [MasterQA is now part of SeleniumBase!](https://github.com/mdmintz/SeleniumBase/tree/master/seleniumbase/masterqa))
+
+![](http://cdn2.hubspot.net/hubfs/100006/images/hybrid_screen.png "MasterQA")
 
 ### Run the example test:
 ```bash
