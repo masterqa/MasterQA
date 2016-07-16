@@ -1,7 +1,7 @@
 # MasterQA
 [![pypi](https://img.shields.io/pypi/v/masterqa.svg)](https://pypi.python.org/pypi/masterqa) [![Build Status](https://travis-ci.org/mdmintz/MasterQA.svg?branch=master)](https://travis-ci.org/mdmintz/MasterQA)
 
-MasterQA combines web automation with manual verification to greatly improve QA productivity.
+### MasterQA combines SeleniumBase automation with manual verification to greatly improve the productivity and sanity of QA teams.
 
 ## (NOTE: [MasterQA is now part of SeleniumBase!](https://github.com/mdmintz/SeleniumBase/tree/master/seleniumbase/masterqa))
 
