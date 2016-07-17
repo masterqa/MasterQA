@@ -11,7 +11,7 @@
 ```bash
 pip install masterqa
 
-git clone https://github.com/mdmintz/MasterQA.git
+git clone https://github.com/masterqa/MasterQA.git
 
 cd MasterQA/examples
 
