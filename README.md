@@ -18,7 +18,7 @@ cd MasterQA/examples
 nosetests masterqa_test.py  # (This defaults to Firefox)
 ```
 
-### Follow the [example](https://github.com/mdmintz/MasterQA/blob/master/examples/masterqa_test.py) to write your own tests:
+### Follow the [example](https://github.com/masterqa/MasterQA/blob/master/examples/masterqa_test.py) to write your own tests:
 
 ```python
 from masterqa import MasterQA
