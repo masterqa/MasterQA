@@ -3,7 +3,7 @@
 
 ### MasterQA combines SeleniumBase automation with manual verification to greatly improve the productivity and sanity of QA teams.
 
-## (NOTE: [MasterQA is now part of SeleniumBase!](https://github.com/seleniumbase/SeleniumBase/tree/master/seleniumbase/masterqa) Go there now for the latest version!!!)
+## (NOTE: **[MasterQA is now part of SeleniumBase!](https://github.com/seleniumbase/SeleniumBase/tree/master/seleniumbase/masterqa)** Go there now for the latest version!!!)
 ### ^^^^^^^^^^^^^^^^^^^
 
 
