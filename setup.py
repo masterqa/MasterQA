@@ -14,8 +14,8 @@ setup(
     description='Automation-Assisted Manual Testing - http://masterqa.com',
     license='The MIT License',
     install_requires=[
-        'seleniumbase==1.2.15',
-        'flake8==3.0.4',
+        'seleniumbase==1.3.3',
+        'flake8==3.3.0',
         ],
     packages=['masterqa'],
     entry_points={
