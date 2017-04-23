@@ -3,13 +3,16 @@
 
 ### MasterQA combines SeleniumBase automation with manual verification to greatly improve the productivity and sanity of QA teams.
 
-## (NOTE: **[MasterQA is now part of SeleniumBase!](https://github.com/seleniumbase/SeleniumBase/tree/master/seleniumbase/masterqa)** Go there now for the latest version!!!)
+## (NOTE: **[MasterQA is now part of SeleniumBase!](https://github.com/seleniumbase/SeleniumBase/tree/master/seleniumbase/masterqa)**)
 ### ^^^^^^^^^^^^^^^^^^^
 
 
 ![](http://cdn2.hubspot.net/hubfs/100006/images/hybrid_screen.png "MasterQA")
 
 ### Run the example test:
+
+(*Requires WebDrivers installed such as [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)*)
+
 ```bash
 pip install masterqa
 
@@ -17,7 +20,7 @@ git clone https://github.com/masterqa/MasterQA.git
 
 cd MasterQA/examples
 
-nosetests masterqa_test.py  # (This defaults to Firefox)
+nosetests masterqa_test.py  # (This defaults to Chrome)
 ```
 
 ### Follow the [example](https://github.com/masterqa/MasterQA/blob/master/examples/masterqa_test.py) to write your own tests:
