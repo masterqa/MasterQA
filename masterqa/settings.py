@@ -15,3 +15,9 @@ START_IN_FULL_SCREEN_MODE = True
 
 # The maximimum idle time allowed (in seconds) before timing out and exiting
 MAX_IDLE_TIME_BEFORE_QUIT = 600
+
+# Default names for folders and files saved
+LATEST_REPORT_DIR = "latest_report"
+REPORT_ARCHIVE_DIR = "archived_reports"
+HTML_REPORT = "report.html"
+RESULTS_TABLE = "results_table.csv"
