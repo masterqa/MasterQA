@@ -6,7 +6,7 @@ from setuptools import setup, find_packages  # noqa
 
 setup(
     name='masterqa',
-    version='1.1.0',
+    version='1.1.1',
     description='Automation-Assisted Manual Testing - http://masterqa.com',
     long_description='Automation-Assisted Manual Testing. http://masterqa.com',
     platforms='Mac * Windows * Linux',
