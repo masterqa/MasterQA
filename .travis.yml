@@ -2,6 +2,8 @@ language: python
 sudo: false
 python:
   - "2.7"
+addons:
+  firefox: "46.0.1"
 install:
   - "pip install --upgrade pip"
   - "pip install -r requirements.txt"
@@ -10,8 +12,8 @@ before_script:
   - "flake8 masterqa/*.py"
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-script:
   - "firefox --version"
+script:
   - "nosetests examples/deploy_only/results_page.py --with-selenium --browser=firefox"
   - "pytest examples/deploy_only/results_page.py --with-selenium --browser=firefox"
 env:
