@@ -11,7 +11,7 @@ DEFAULT_VALIDATION_MESSAGE = "Does the page look good?"
 WAIT_TIME_BEFORE_VERIFY = 1.0
 
 # If True, the automation will start in full-screen mode
-START_IN_FULL_SCREEN_MODE = True
+START_IN_FULL_SCREEN_MODE = False
 
 # The maximimum idle time allowed (in seconds) before timing out and exiting
 MAX_IDLE_TIME_BEFORE_QUIT = 600

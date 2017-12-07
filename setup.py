@@ -6,7 +6,7 @@ from setuptools import setup, find_packages  # noqa
 
 setup(
     name='masterqa',
-    version='1.1.2',
+    version='1.1.3',
     description='Automation-Assisted Manual Testing - http://masterqa.com',
     long_description='Automation-Assisted Manual Testing. http://masterqa.com',
     platforms='Mac * Windows * Linux',
@@ -16,7 +16,7 @@ setup(
     maintainer='Michael Mintz',
     license='The MIT License',
     install_requires=[
-        'seleniumbase==1.4.8',
+        'seleniumbase==1.4.14',
         'flake8==3.4.1',
         ],
     packages=['masterqa'],
