@@ -16,8 +16,8 @@ setup(
     maintainer='Michael Mintz',
     license='The MIT License',
     install_requires=[
-        'seleniumbase==1.4.14',
-        'flake8==3.4.1',
+        'seleniumbase>=1.16.14',
+        'flake8==3.5.0',
         ],
     packages=['masterqa'],
     entry_points={
