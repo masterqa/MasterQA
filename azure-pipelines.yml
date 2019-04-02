@@ -33,8 +33,14 @@ jobs:
   - script: sudo apt install google-chrome-stable
     displayName: 'Install Chrome'
 
+  - script: sudo apt-get install firefox
+    displayName: 'Install Firefox'
+
   - script: seleniumbase install chromedriver
     displayName: 'Install Chromedriver'
+
+  - script: seleniumbase install geckodriver
+    displayName: 'Install Geckodriver (Firefox driver)'
 
   - script: |
       pip install pytest
