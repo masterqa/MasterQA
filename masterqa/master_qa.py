@@ -7,6 +7,7 @@ from selenium.webdriver.remote.errorhandler import NoAlertPresentException
 from seleniumbase import BaseCase
 from seleniumbase.core.style_sheet import style
 from masterqa import settings
+from seleniumbase.fixtures import js_utils
 
 LATEST_REPORT_DIR = settings.LATEST_REPORT_DIR
 ARCHIVE_DIR = settings.REPORT_ARCHIVE_DIR
@@ -57,54 +58,140 @@ class __MasterQATestCase__(BaseCase):
             for f in filelist:
                 os.remove("%s/%s" % (file_path, f))
 
+    def jq_confirm_dialog(self, question):
+        count = self.manual_check_count + 1
+        title_content = ('<center><font color="#7700bb">Manual Check #%s:'
+                         '</font></center><hr><font color="#0066ff">%s</font>'
+                         '' % (count, question))
+        title_content = js_utils.escape_quotes_if_needed(title_content)
+        jqcd = ("""jconfirm({
+                    boxWidth: '32.5%%',
+                    useBootstrap: false,
+                    containerFluid: false,
+                    animationBounce: 1,
+                    type: 'default',
+                    theme: 'bootstrap',
+                    typeAnimated: true,
+                    animation: 'scale',
+                    draggable: true,
+                    dragWindowGap: 1,
+                    container: 'body',
+                    title: '%s',
+                    content: '',
+                    buttons: {
+                        fail_button: {
+                            btnClass: 'btn-red',
+                            text: 'NO / FAIL',
+                            action: function(){
+                                $jqc_status = "Failure!"
+                            }
+                        },
+                        pass_button: {
+                            btnClass: 'btn-green',
+                            text: 'YES / PASS',
+                            action: function(){
+                                $jqc_status = "Success!"
+                            }
+                        }
+                    }
+                });""" % title_content)
+        self.execute_script(jqcd)
+
     def manual_page_check(self, *args):
         if not args:
-            instructions = DEFAULT_VALIDATION_MESSAGE
+            instructions = DEFAULT_VALIDATION_MESSAGE  # self.verify()
         else:
             instructions = str(args[0])
+            if len(args) > 1:
+                pass
 
-        # Give the human enough time to see the page first
-        wait_time_before_verify = WAIT_TIME_BEFORE_VERIFY
-        if self.verify_delay:
-            wait_time_before_verify = float(self.verify_delay)
-        time.sleep(wait_time_before_verify)
-        question = "Approve?"
+        question = "Approve?"  # self.verify("")
         if instructions and "?" not in instructions:
-            question = instructions + " Approve?"
+            question = instructions + " <> Approve?"
         elif instructions and "?" in instructions:
             question = instructions
 
-        if self.browser == 'ie':
-            text = self.execute_script(
-                '''if(confirm("%s")){return "Success!"}
-                else{return "Failure!"}''' % question)
-        elif self.browser == 'chrome':
-            self.execute_script('''if(confirm("%s"))
-                {window.master_qa_result="Success!"}
-                else{window.master_qa_result="Failure!"}''' % question)
-            time.sleep(0.05)
-            self.wait_for_special_alert_absent()
-            text = self.execute_script('''return window.master_qa_result''')
+        use_jqc = False
+        self.wait_for_ready_state_complete()
+        if js_utils.is_jquery_confirm_activated(self.driver):
+            use_jqc = True
         else:
+            js_utils.activate_jquery_confirm(self.driver)
+            get_jqc = None
             try:
-                self.execute_script(
-                    '''if(confirm("%s")){window.master_qa_result="Success!"}
+                get_jqc = self.execute_script("return jconfirm")
+                get_jqc = get_jqc["instances"]
+                use_jqc = True
+            except Exception:
+                use_jqc = False
+
+        if use_jqc:
+            wait_time_before_verify = WAIT_TIME_BEFORE_VERIFY
+            if self.verify_delay:
+                wait_time_before_verify = float(self.verify_delay)
+            # Allow a moment to see the full page before the dialog box pops up
+            time.sleep(wait_time_before_verify)
+
+            # Use the jquery_confirm library for manual page checks
+            self.jq_confirm_dialog(question)
+            time.sleep(0.02)
+            waiting_for_response = True
+            while waiting_for_response:
+                time.sleep(0.05)
+                jqc_open = self.execute_script(
+                    "return jconfirm.instances.length")
+                if str(jqc_open) == "0":
+                    break
+            time.sleep(0.1)
+            status = None
+            try:
+                status = self.execute_script("return $jqc_status")
+            except Exception:
+                status = "Failure!"
+                pre_status = self.execute_script(
+                    "return jconfirm.lastClicked.hasClass('btn-green')")
+                if pre_status:
+                    status = "Success!"
+        else:
+            # Fallback to plain js confirm dialogs if can't load jquery_confirm
+            if self.browser == 'ie':
+                text = self.execute_script(
+                    '''if(confirm("%s")){return "Success!"}
+                    else{return "Failure!"}''' % question)
+            elif self.browser == 'chrome':
+                self.execute_script('''if(confirm("%s"))
+                    {window.master_qa_result="Success!"}
                     else{window.master_qa_result="Failure!"}''' % question)
-            except WebDriverException:
-                # Fix for https://github.com/mozilla/geckodriver/issues/431
-                pass
-            time.sleep(0.05)
-            self.wait_for_special_alert_absent()
-            text = self.execute_script('''return window.master_qa_result''')
+                time.sleep(0.05)
+                self.wait_for_special_alert_absent()
+                text = self.execute_script('return window.master_qa_result')
+            else:
+                try:
+                    self.execute_script(
+                        '''if(confirm("%s"))
+                        {window.master_qa_result="Success!"}
+                        else{window.master_qa_result="Failure!"}''' % question)
+                except WebDriverException:
+                    # Fix for https://github.com/mozilla/geckodriver/issues/431
+                    pass
+                time.sleep(0.05)
+                self.wait_for_special_alert_absent()
+                text = self.execute_script('return window.master_qa_result')
+            status = text
+
         self.manual_check_count += 1
-        if "Success!" in text:
+        try:
+            current_url = self.driver.current_url
+        except Exception:
+            current_url = self.execute_script("return document.URL")
+        if "Success!" in str(status):
             self.manual_check_successes += 1
             self.page_results_list.append(
                 '"%s","%s","%s","%s","%s","%s","%s","%s"' % (
                     self.manual_check_count,
                     "Success",
                     "-",
-                    self.driver.current_url,
+                    current_url,
                     self.browser,
                     self.get_timestamp()[:-3],
                     instructions,
@@ -118,7 +205,7 @@ class __MasterQATestCase__(BaseCase):
                     self.manual_check_count,
                     "FAILED!",
                     bad_page_name,
-                    self.driver.current_url,
+                    current_url,
                     self.browser,
                     self.get_timestamp()[:-3],
                     instructions,
@@ -200,15 +287,18 @@ class __MasterQATestCase__(BaseCase):
         if self.manual_check_successes == self.manual_check_count:
             pass
         else:
-            print("WARNING!!! There were page issues detected!")
+            print("WARNING: There were page issues detected!")
             perfection = False
 
         if self.incomplete_runs > 0:
-            print("WARNING!!! Not all tests finished running!")
+            print("WARNING: Not all tests finished running!")
             perfection = False
 
         if perfection:
-            print("SUCCESS!!! Everything checks out OKAY!")
+            if self.manual_check_count > 0:
+                print("SUCCESS: Everything checks out OKAY!")
+            else:
+                print("WARNING: No manual checks were performed!")
         else:
             pass
         self.add_bad_page_log_file()  # Includes successful results
@@ -272,15 +362,13 @@ class __MasterQATestCase__(BaseCase):
                     display_url = display_url[0:58] + '...'
                 line = '<a href="%s">%s</a>' % (
                     "file://" + log_path + '/' + line[2], line[2]) + '''
-                    &nbsp;&nbsp;<td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<td>
                     ''' + '<a href="%s">%s</a>' % (line[3], display_url)
                 line = line.replace('"', '')
                 failure_table += '<tr><td>%s</tr>\n' % line
         failure_table += '</tbody></table>'
-        powered_by = '''<h3 style="color:#0C8CDB; font-size:22px;">
-            MasterQA is powered by SeleniumBase</h3>'''
-        table_view = '%s%s%s%s' % (
-            summary_table, log_table, failure_table, powered_by)
+        table_view = '%s%s%s' % (
+            summary_table, log_table, failure_table)
         report_html = '<html><head>%s</head><body>%s</body></html>' % (
             style, table_view)
         results_file = self.add_results_page(report_html)
@@ -291,10 +379,7 @@ class __MasterQATestCase__(BaseCase):
         self.open("file://%s" % archived_results_file)
         if auto_close_results_page:
             # Long enough to notice the results before closing the page
-            wait_time_before_verify = WAIT_TIME_BEFORE_VERIFY
-            if self.verify_delay:
-                wait_time_before_verify = float(self.verify_delay)
-            time.sleep(wait_time_before_verify)
+            time.sleep(1.0)
         else:
             # The user can decide when to close the results page
             print("\n*** Close the html report window to continue ***")
@@ -305,13 +390,23 @@ class __MasterQATestCase__(BaseCase):
 class MasterQA(__MasterQATestCase__):
 
     def setUp(self):
+        self.check_count = 0
         self.auto_close_results_page = False
-        super(__MasterQATestCase__, self).setUp()
+        super(__MasterQATestCase__, self).setUp(masterqa_mode=True)
         self.manual_check_setup()
+        if self.headless:
+            self.auto_close_results_page = True
         if START_IN_FULL_SCREEN_MODE:
             self.maximize_window()
 
     def verify(self, *args):
+        warn_msg = "\nWARNING: MasterQA skips manual checks in headless mode!"
+        self.check_count += 1
+        if self.headless:
+            if self.check_count == 1:
+                print(warn_msg)
+            return
+        # This is where the magic happens
         self.manual_page_check(*args)
 
     def auto_close_results(self):
@@ -322,6 +417,8 @@ class MasterQA(__MasterQATestCase__):
         self.auto_close_results_page = True
 
     def tearDown(self):
+        if self.headless and self.check_count > 0:
+            print("WARNING: %s manual checks were skipped!" % self.check_count)
         if sys.exc_info()[1]:
             self.add_failure(sys.exc_info()[1])
         self.process_manual_check_results(self.auto_close_results_page)
