@@ -30,7 +30,7 @@ jobs:
   - script: python -m pip install --upgrade pip && pip install -r requirements.txt
     displayName: 'Install dependencies'
 
-  - script: apt install google-chrome-stable
+  - script: sudo apt install google-chrome-stable
     displayName: 'Install Chrome'
 
   - script: seleniumbase install chromedriver
