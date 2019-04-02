@@ -20,6 +20,7 @@ setup(
     version='1.1.5',
     description='Automation-Assisted Manual Testing - http://masterqa.com',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     platforms='Mac * Windows * Linux',
     url='http://masterqa.com',
     author='Michael Mintz',
