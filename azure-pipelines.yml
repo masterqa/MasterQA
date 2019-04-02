@@ -15,8 +15,6 @@ jobs:
     matrix:
       Python27:
         python.version: '2.7'
-      Python35:
-        python.version: '3.5'
       Python36:
         python.version: '3.6'
       Python37:
@@ -32,9 +30,21 @@ jobs:
   - script: python -m pip install --upgrade pip && pip install -r requirements.txt
     displayName: 'Install dependencies'
 
+  - script: sudo apt install google-chrome-stable
+    displayName: 'Install Chrome'
+
+  - script: sudo apt-get install firefox
+    displayName: 'Install Firefox'
+
+  - script: seleniumbase install chromedriver
+    displayName: 'Install Chromedriver'
+
+  - script: seleniumbase install geckodriver
+    displayName: 'Install Geckodriver (Firefox driver)'
+
   - script: |
       pip install pytest
-      pytest tests --doctest-modules --junitxml=junit/test-results.xml
+      pytest examples --headless --junitxml=junit/test-results.xml
     displayName: 'pytest'
 
   - task: PublishTestResults@2

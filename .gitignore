@@ -1,3 +1,4 @@
+# Compiled Python Bytecode
 *.py[cod]
 
 # Packages
@@ -28,23 +29,59 @@ nosetests.xml
 
 # py.test
 .cache/*
+.pytest_cache/*
 .pytest_config
 
+# Azure Pipelines
+junit
+test-results.xml
+
 # Developer
+.idea
 .project
 .pydevproject
+.vscode
 
-# Other
-selenium-server-standalone.jar
-geckodriver.log
-downloaded_files
-archived_files
+# Web Drivers
+chromedriver
+geckodriver
+operadriver
+MicrosoftWebDriver.exe
+IEDriverServer.exe
+chromedriver.exe
+geckodriver.exe
+operadriver.exe
+
+# Logs
 logs
 latest_logs
 log_archives
 archived_logs
+geckodriver.log
+
+# Reports
 latest_report
 report_archives
 archived_reports
+html_report.html
+report.html
+report.xml
+
+# Tours
+tours_exported
+
+# Automated Visual Testing
+visual_baseline
+
+# Other
+selenium-server-standalone.jar
+proxy.zip
+verbose_hub_server.dat
+verbose_node_server.dat
+ip_of_grid_hub.dat
+downloaded_files
+archived_files
+assets
 temp
+temp*
 node_modules
