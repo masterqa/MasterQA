@@ -17,7 +17,7 @@ except IOError:
 
 setup(
     name='masterqa',
-    version='1.1.4',
+    version='1.1.5',
     description='Automation-Assisted Manual Testing - http://masterqa.com',
     long_description=long_description,
     platforms='Mac * Windows * Linux',
