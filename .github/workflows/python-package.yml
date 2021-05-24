@@ -1,0 +1,62 @@
+name: CI build
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches:
+
+jobs:
+  build:
+
+    #runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        os: [ubuntu-18.04, macos-latest]
+        python-version: [3.6, 3.7, 3.8, 3.9]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Install SeleniumBase
+      run: |
+        python setup.py install
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        # Stop the build if there are flake8 issues
+        flake8 . --count --show-source --statistics --exclude=temp
+    - name: Install Chrome and Firefox
+      if: matrix.os == 'ubuntu-18.04'
+      run: |
+        sudo apt install google-chrome-stable
+        sudo apt-get install firefox
+    - name: Check the console scripts interface
+      run: |
+        seleniumbase
+        sbase
+    - name: Install chromedriver and geckodriver (Firefox Webdriver)
+      run: |
+        seleniumbase install chromedriver
+    - name: Make sure pytest is working
+      run: |
+        echo "def test_1(): pass" > nothing.py
+        pytest nothing.py
+    - name: Run pytest examples --headless --junitxml=junit/test-results.xml
+      run: |
+        pytest examples --headless --junitxml=junit/test-results.xml
+    - name: Deploy-only check (Firefox)
+      run: |
+        pytest examples/deploy_only/results_page.py --with-selenium --browser=firefox
+    - name: Deploy-only check (Chrome)
+      run: |
+        pytest examples/deploy_only/results_page.py --with-selenium --browser=chrome

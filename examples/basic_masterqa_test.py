@@ -2,12 +2,11 @@ from masterqa import MasterQA
 
 
 class MasterQATests(MasterQA):
-
     def test_masterqa(self):
-        self.open("http://xkcd.com/1700/")
+        self.open("https://xkcd.com/1700/")
         self.verify("Do you see a webcomic?")
-        self.click_link_text('Store')
-        self.click_link_text('all the things')
-        self.verify("Do you see items for sale?")
-        self.update_text("input.search-input", "Robots\n")
-        self.verify("Do you see robots in the search results?")
+        self.open("https://store.xkcd.com/collections/everything")
+        self.highlight_click('[title="things for walls"]')
+        self.verify("Do you see posters for sale?")
+        self.highlight_update_text("input.search-input", "book\n")
+        self.verify("Do you see books in the search results?")
