@@ -64,7 +64,8 @@ class __MasterQATestCase__(BaseCase):
                          '</font></center><hr><font color="#0066ff">%s</font>'
                          '' % (count, question))
         title_content = js_utils.escape_quotes_if_needed(title_content)
-        jqcd = ("""jconfirm({
+        jqcd = (
+            """jconfirm({
                     boxWidth: '32.5%%',
                     useBootstrap: false,
                     containerFluid: false,
@@ -79,22 +80,28 @@ class __MasterQATestCase__(BaseCase):
                     title: '%s',
                     content: '',
                     buttons: {
-                        fail_button: {
-                            btnClass: 'btn-red',
-                            text: 'NO / FAIL',
-                            action: function(){
-                                $jqc_status = "Failure!"
-                            }
-                        },
                         pass_button: {
                             btnClass: 'btn-green',
                             text: 'YES / PASS',
+                            keys: ['y', 'p', '1'],
                             action: function(){
-                                $jqc_status = "Success!"
+                                $jqc_status = "Success!";
+                                jconfirm.lastButtonText = "Success!";
+                            }
+                        },
+                        fail_button: {
+                            btnClass: 'btn-red',
+                            text: 'NO / FAIL',
+                            keys: ['n', 'f', '2'],
+                            action: function(){
+                                $jqc_status = "Failure!";
+                                jconfirm.lastButtonText = "Failure!";
                             }
                         }
                     }
-                });""" % title_content)
+                });"""
+            % title_content
+        )
         self.execute_script(jqcd)
 
     def manual_page_check(self, *args):
