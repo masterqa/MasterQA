@@ -55,7 +55,7 @@ if sys.argv[-1] == 'publish':
 
 setup(
     name='masterqa',
-    version='1.3.0',
+    version='1.4.0',
     description='Automation-Assisted Manual Testing - https://masterqa.com',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -66,7 +66,7 @@ setup(
     maintainer='Michael Mintz',
     license='The MIT License',
     install_requires=[
-        'seleniumbase>=1.64.1',
+        'seleniumbase>=1.66.0',
         ],
     packages=['masterqa'],
     entry_points={
