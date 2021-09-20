@@ -67,6 +67,7 @@ setup(
     license='The MIT License',
     install_requires=[
         'seleniumbase>=1.66.0',
+        'sbvirtualdisplay>=1.0.0',
         ],
     packages=['masterqa'],
     entry_points={
