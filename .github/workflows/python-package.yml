@@ -1,21 +1,24 @@
 name: CI build
+
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches:
+      - master
+  pull_request:
 
 jobs:
   build:
 
-    #runs-on: ubuntu-18.04
+    env:
+      PY_COLORS: "1"
     strategy:
       fail-fast: false
       max-parallel: 8
       matrix:
         os: [ubuntu-18.04, macos-latest]
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
 
+    # runs-on: ubuntu-18.04
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v1
