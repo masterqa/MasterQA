@@ -66,7 +66,7 @@ setup(
     maintainer='Michael Mintz',
     license='The MIT License',
     install_requires=[
-        'seleniumbase>=2.4.13',
+        'seleniumbase>=2.4.14',
         'sbvirtualdisplay>=1.0.0',
         ],
     packages=['masterqa'],
