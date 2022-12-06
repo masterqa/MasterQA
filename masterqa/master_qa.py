@@ -340,8 +340,10 @@ class __MasterQATestCase__(BaseCase):
                                      ir_color,
                                      self.incomplete_runs)
 
-        summary_table = '''<h1 id="ContextHeader" class="sectionHeader" title="">
-                     %s</h1>''' % summary_table
+        summary_table = (
+            '''<h1 id="ContextHeader" class="sectionHeader" title="">
+            %s</h1>''' % summary_table
+        )
 
         log_link_shown = '../%s%s/' % (
             ARCHIVE_DIR, web_log_path.split(ARCHIVE_DIR)[1])
