@@ -5,7 +5,7 @@ import time
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.remote.errorhandler import NoAlertPresentException
 from seleniumbase import BaseCase
-from seleniumbase.core.style_sheet import style
+from seleniumbase.core.style_sheet import get_report_style
 from masterqa import settings
 from seleniumbase.fixtures import js_utils
 
@@ -379,7 +379,7 @@ class __MasterQATestCase__(BaseCase):
         table_view = '%s%s%s' % (
             summary_table, log_table, failure_table)
         report_html = '<html><head>%s</head><body>%s</body></html>' % (
-            style, table_view)
+            get_report_style, table_view)
         results_file = self.add_results_page(report_html)
         archived_results_file = log_path + '/' + RESULTS_PAGE
         shutil.copyfile(results_file, archived_results_file)
