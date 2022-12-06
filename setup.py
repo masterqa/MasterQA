@@ -22,7 +22,7 @@ except IOError:
     long_description = (
         "Automation-Assisted Manual Testing - https://masterqa.com")
 
-if sys.argv[-1] == 'publish':
+if sys.argv[-1] == "publish":
     reply = None
     input_method = input
     if not sys.version_info[0] >= 3:
