@@ -54,6 +54,7 @@ jobs:
     - name: Install chromedriver and geckodriver (Firefox Webdriver)
       run: |
         seleniumbase install chromedriver
+        seleniumbase install geckodriver
     - name: Make sure pytest is working
       run: |
         echo "def test_1(): pass" > nothing.py
@@ -63,7 +64,7 @@ jobs:
         pytest examples --headless --junitxml=junit/test-results.xml
     - name: Deploy-only check (Firefox)
       run: |
-        pytest examples/deploy_only/results_page.py --with-selenium --browser=firefox
+        pytest examples/deploy_only/results_page.py --browser=firefox --reruns=2
     - name: Deploy-only check (Chrome)
       run: |
-        pytest examples/deploy_only/results_page.py --with-selenium --browser=chrome
+        pytest examples/deploy_only/results_page.py --browser=chrome
