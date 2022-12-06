@@ -1,9 +1,13 @@
 name: CI build
 
 on:
+  schedule:
+    - cron: "15 * * * *"
   push:
     branches:
       - master
+  workflow_dispatch:
+    branches:
   pull_request:
 
 jobs:
