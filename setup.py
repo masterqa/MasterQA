@@ -1,6 +1,4 @@
-"""
-The setup package to install MasterQA dependencies
-"""
+"""The setup package to install MasterQA dependencies"""
 from setuptools import setup, find_packages  # noqa
 import os
 import sys
@@ -42,7 +40,7 @@ if sys.argv[-1] == "publish":
         os.system("rm -f dist/*.egg; rm -f dist/*.tar.gz; rm -f dist/*.whl")
         os.system("rm -rf build/bdist.*; rm -rf build/lib")
         print("\n*** Installing build: *** (Required for PyPI uploads)\n")
-        os.system("python -m pip install --upgrade 'build>=0.9.0'")
+        os.system("python -m pip install --upgrade 'build>=0.10.0'")
         print("\n*** Installing twine: *** (Required for PyPI uploads)\n")
         os.system("python -m pip install --upgrade 'twine>=4.0.2'")
         print("\n*** Installing tqdm: *** (Required for PyPI uploads)\n")
@@ -58,7 +56,7 @@ if sys.argv[-1] == "publish":
 
 setup(
     name="masterqa",
-    version="1.7.1",
+    version="1.7.2",
     description="Automation-Assisted Manual Testing - https://masterqa.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -70,9 +68,9 @@ setup(
     license="MIT",
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*",  # noqa: E501
     install_requires=[
-        "seleniumbase>=4.9.7",
+        "seleniumbase>=4.10.3",
         "sbvirtualdisplay>=1.1.1",
-        "pdbp>=1.2.5",
+        "pdbp>=1.2.8",
         "tabcompleter>=1.1.0",
     ],
     packages=["masterqa"],
