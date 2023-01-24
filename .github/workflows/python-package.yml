@@ -2,7 +2,7 @@ name: CI build
 
 on:
   schedule:
-    - cron: "15 * * * *"
+    - cron: "18 * * * *"
   push:
     branches:
       - master
@@ -61,10 +61,16 @@ jobs:
         pytest nothing.py
     - name: Run pytest examples --headless --junitxml=junit/test-results.xml
       run: |
-        pytest examples --headless --junitxml=junit/test-results.xml
+        pytest examples --headless --junitxml=junit/test-results.xml --reruns=2
     - name: Deploy-only check (Firefox)
       run: |
         pytest examples/deploy_only/results_page.py --browser=firefox --reruns=2
     - name: Deploy-only check (Chrome)
       run: |
-        pytest examples/deploy_only/results_page.py --browser=chrome
+        pytest examples/deploy_only/results_page.py --browser=chrome --reruns=2
+    - name: Verify seleniumbase install from PyPI
+      run: |
+        pip install seleniumbase -U --no-deps --force-reinstall --no-cache-dir
+    - name: Verify SeleniumBase clone from GitHub
+      run: |
+        git clone https://github.com/seleniumbase/SeleniumBase.git
