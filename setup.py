@@ -1,6 +1,4 @@
-"""
-The setup package to install MasterQA dependencies
-"""
+"""The setup package to install MasterQA dependencies"""
 from setuptools import setup, find_packages  # noqa
 import os
 import sys
