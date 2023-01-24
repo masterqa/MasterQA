@@ -9,10 +9,12 @@ class MasterQATests(MasterQA):
         for i in range(3):
             self.click('a[rel="prev"]')
         self.verify()
+
         self.open("https://xkcd.com/1520/")
         for i in range(2):
             self.click('a[rel="next"]')
         self.verify("Can you find the moon?")
+
         self.click('a[rel="next"]')
         self.verify("Do the drones look safe?")
 
