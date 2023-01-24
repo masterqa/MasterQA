@@ -1,5 +1,6 @@
 # MasterQA
-[![pypi](https://img.shields.io/pypi/v/masterqa.svg)](https://pypi.python.org/pypi/masterqa) [![Build Status](https://travis-ci.org/masterqa/MasterQA.svg?branch=master)](https://travis-ci.org/masterqa/MasterQA)
+
+[![pypi](https://img.shields.io/pypi/v/masterqa.svg)](https://pypi.python.org/pypi/masterqa) [![Build Status](https://github.com/masterqa/MasterQA/workflows/CI%20build/badge.svg)](https://github.com/masterqa/MasterQA/actions)
 
 ### MasterQA combines SeleniumBase automation with manual verification to greatly improve the productivity and sanity of QA teams.
 
@@ -24,7 +25,7 @@ pytest masterqa_test.py  # (Default browser: Chrome)
 ### Follow the [example](https://github.com/masterqa/MasterQA/blob/master/examples/masterqa_test.py) to write your own tests:
 
 ```python
-from masterqa import MasterQA
+from seleniumbase import MasterQA
 
 class MasterQATests(MasterQA):
     def test_xkcd(self):
@@ -34,15 +35,19 @@ class MasterQATests(MasterQA):
         for i in range(3):
             self.click('a[rel="prev"]')
         self.verify()
+
         self.open("https://xkcd.com/1520/")
         for i in range(2):
             self.click('a[rel="next"]')
         self.verify("Can you find the moon?")
+
         self.click('a[rel="next"]')
         self.verify("Do the drones look safe?")
-        self.open("https://store.xkcd.com/search")
-        self.type("input.search-input", "book\n")
-        self.verify("Do you see books in the search results?")
+
+        self.open("https://seleniumbase.io/devices/")
+        self.type("input#urlInput", "seleniumbase.io/error_page\n")
+        self.verify("Do you see Octocat in a Jedi knight robe?")
+
         self.open("https://xkcd.com/213/")
         for i in range(5):
             self.click('a[rel="prev"]')
