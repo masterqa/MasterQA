@@ -17,10 +17,10 @@ jobs:
       PY_COLORS: "1"
     strategy:
       fail-fast: false
-      max-parallel: 10
+      max-parallel: 18
       matrix:
-        os: [ubuntu-20.04, macos-latest]
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        os: [ubuntu-20.04, macos-latest, windows-latest]
+        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
 
     # runs-on: ubuntu-20.04
     runs-on: ${{ matrix.os }}
@@ -74,3 +74,12 @@ jobs:
     - name: Verify SeleniumBase clone from GitHub
       run: |
         git clone https://github.com/seleniumbase/SeleniumBase.git
+    - name: Verify masterqa install from PyPI
+      run: |
+        pip install masterqa -U --no-deps --force-reinstall --no-cache-dir
+    - name: Verify pdbp install from PyPI
+      run: |
+        pip install pdbp -U --no-deps --force-reinstall --no-cache-dir
+    - name: Verify tabcompleter install from PyPI
+      run: |
+        pip install tabcompleter -U --no-deps --force-reinstall --no-cache-dir
