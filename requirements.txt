@@ -1,5 +1,5 @@
 seleniumbase>=4.12.6
-sbvirtualdisplay>=1.2.0
 pdbp>=1.2.8
 tabcompleter>=1.1.0
+sbvirtualdisplay>=1.2.0
 -e .

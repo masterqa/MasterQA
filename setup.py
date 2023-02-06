@@ -69,12 +69,12 @@ setup(
     python_requires=">=3.6",
     install_requires=[
         "seleniumbase>=4.12.6",
-        "sbvirtualdisplay>=1.2.0",
         "pdbp>=1.2.8",
         "tabcompleter>=1.1.0",
+        "sbvirtualdisplay>=1.2.0",
     ],
     packages=["masterqa"],
     entry_points={
         "nose.plugins": []
-        }
-    )
+    }
+)
