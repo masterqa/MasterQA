@@ -56,7 +56,7 @@ if sys.argv[-1] == "publish":
 
 setup(
     name="masterqa",
-    version="1.7.2",
+    version="1.8.0",
     description="Automation-Assisted Manual Testing - https://masterqa.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -66,15 +66,15 @@ setup(
     author_email="mdmintz@gmail.com",
     maintainer="Michael Mintz",
     license="MIT",
-    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*",  # noqa: E501
+    python_requires=">=3.6",
     install_requires=[
-        "seleniumbase>=4.10.3",
-        "sbvirtualdisplay>=1.1.1",
+        "seleniumbase>=4.12.6",
         "pdbp>=1.2.8",
         "tabcompleter>=1.1.0",
+        "sbvirtualdisplay>=1.2.0",
     ],
     packages=["masterqa"],
     entry_points={
         "nose.plugins": []
-        }
-    )
+    }
+)
