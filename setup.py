@@ -66,10 +66,10 @@ setup(
     author_email="mdmintz@gmail.com",
     maintainer="Michael Mintz",
     license="MIT",
-    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*",  # noqa: E501
+    python_requires=">=3.6",
     install_requires=[
-        "seleniumbase>=4.10.3",
-        "sbvirtualdisplay>=1.1.1",
+        "seleniumbase>=4.12.6",
+        "sbvirtualdisplay>=1.2.0",
         "pdbp>=1.2.8",
         "tabcompleter>=1.1.0",
     ],
