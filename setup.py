@@ -68,7 +68,7 @@ setup(
     license="MIT",
     python_requires=">=3.6",
     install_requires=[
-        "seleniumbase>=4.12.6",
+        "seleniumbase>=4.12.7",
         "pdbp>=1.2.8",
         "tabcompleter>=1.1.0",
         "sbvirtualdisplay>=1.2.0",
