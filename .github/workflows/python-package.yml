@@ -76,7 +76,7 @@ jobs:
         git clone https://github.com/seleniumbase/SeleniumBase.git
     - name: Verify masterqa install from PyPI
       run: |
-        pip install masterqa -U --no-deps --force-reinstall --no-cache-dir
+        pip install masterqa -U --no-deps --force-reinstall --no-cache-dir --user
     - name: Verify pdbp install from PyPI
       run: |
         pip install pdbp -U --no-deps --force-reinstall --no-cache-dir
