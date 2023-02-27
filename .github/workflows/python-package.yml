@@ -60,6 +60,7 @@ jobs:
       run: |
         echo "def test_1(): pass" > nothing.py
         pytest nothing.py
+        nosetests nothing.py
     - name: Run pytest examples --headless --junitxml=junit/test-results.xml
       run: |
         pytest examples --headless --junitxml=junit/test-results.xml --reruns=2
