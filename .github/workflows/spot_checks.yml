@@ -38,7 +38,7 @@ jobs:
         # Stop the build if there are flake8 issues
         flake8 . --count --show-source --statistics --exclude=temp
     - name: Install Chrome and Firefox
-      if: 'ubuntu' in matrix.os
+      if: ${{ matrix.os == 'ubuntu-latest' }}
       run: |
         sudo apt install google-chrome-stable
         sudo apt-get install firefox
