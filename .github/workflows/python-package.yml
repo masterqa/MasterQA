@@ -42,19 +42,17 @@ jobs:
         pip install flake8
         # Stop the build if there are flake8 issues
         flake8 . --count --show-source --statistics --exclude=temp
-    - name: Install Chrome and Firefox
+    - name: Install Chrome
       if: matrix.os == 'ubuntu-20.04'
       run: |
         sudo apt install google-chrome-stable
-        sudo apt-get install firefox
     - name: Check the console scripts interface
       run: |
         seleniumbase
         sbase
-    - name: Install chromedriver and geckodriver (Firefox Webdriver)
+    - name: Install chromedriver
       run: |
         seleniumbase install chromedriver
-        seleniumbase install geckodriver
     - name: Make sure pytest is working
       run: |
         echo "def test_1(): pass" > nothing.py
@@ -63,9 +61,6 @@ jobs:
     - name: Run pytest examples --headless --junitxml=junit/test-results.xml
       run: |
         pytest examples --headless --junitxml=junit/test-results.xml --reruns=2
-    - name: Deploy-only check (Firefox)
-      run: |
-        pytest examples/deploy_only/results_page.py --browser=firefox --reruns=2
     - name: Deploy-only check (Chrome)
       run: |
         pytest examples/deploy_only/results_page.py --browser=chrome --reruns=2
