@@ -2,8 +2,7 @@
 
 
 def test_simple_cases(testdir):
-    """Verify a simple passing test and a simple failing test.
-    The failing test is marked as xfail to have it skipped."""
+    """Verify a simple passing test and a simple failing test."""
     testdir.makepyfile(
         """
         import pytest
@@ -11,14 +10,13 @@ def test_simple_cases(testdir):
         class MyTestCase(MasterQA):
             def test_passing(self):
                 self.assert_equal('yes', 'yes')
-            @pytest.mark.xfail
             def test_failing(self):
                 self.assert_equal('yes', 'no')
         """
     )
     result = testdir.inline_run("--headless", "--rs", "-v")
     assert result.matchreport("test_passing").passed
-    assert result.matchreport("test_failing").skipped
+    assert result.matchreport("test_failing").failed
 
 
 def test_basecase(testdir):
