@@ -48,8 +48,8 @@ jobs:
         sbase
     - name: Install chromedriver and geckodriver (Firefox Webdriver)
       run: |
-        seleniumbase install chromedriver
-        seleniumbase install geckodriver
+        seleniumbase install chromedriver --path
+        seleniumbase install geckodriver --path
     - name: Make sure pytest is working
       run: |
         echo "def test_1(): pass" > nothing.py
