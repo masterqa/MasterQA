@@ -29,7 +29,10 @@ if sys.argv[-1] == "publish":
         ">>> Confirm release PUBLISH to PyPI? (yes/no): ")).lower().strip()
     if reply == "yes":
         print("\n*** Checking code health with flake8:\n")
-        os.system("python -m pip install 'flake8==5.0.4'")
+        if sys.version_info >= (3, 9):
+            os.system("python -m pip install 'flake8==6.0.0'")
+        else:
+            os.system("python -m pip install 'flake8==5.0.4'")
         flake8_status = os.system("flake8 --exclude=recordings,temp")
         if flake8_status != 0:
             print("\nWARNING! Fix flake8 issues before publishing to PyPI!\n")
@@ -41,6 +44,8 @@ if sys.argv[-1] == "publish":
         os.system("rm -rf build/bdist.*; rm -rf build/lib")
         print("\n*** Installing build: *** (Required for PyPI uploads)\n")
         os.system("python -m pip install --upgrade 'build>=0.10.0'")
+        print("\n*** Installing pkginfo: *** (Required for PyPI uploads)\n")
+        os.system("python -m pip install --upgrade 'pkginfo>=1.9.6'")
         print("\n*** Installing twine: *** (Required for PyPI uploads)\n")
         os.system("python -m pip install --upgrade 'twine>=4.0.2'")
         print("\n*** Installing tqdm: *** (Required for PyPI uploads)\n")
@@ -56,7 +61,7 @@ if sys.argv[-1] == "publish":
 
 setup(
     name="masterqa",
-    version="1.8.1",
+    version="1.8.2",
     description="Automation-Assisted Manual Testing - https://masterqa.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -68,9 +73,9 @@ setup(
     license="MIT",
     python_requires=">=3.6",
     install_requires=[
-        "seleniumbase>=4.12.7",
-        "pdbp>=1.2.8",
-        "tabcompleter>=1.1.0",
+        "seleniumbase>=4.14.1",
+        "pdbp>=1.3.1",
+        "tabcompleter>=1.2.0",
         "sbvirtualdisplay>=1.2.0",
     ],
     packages=["masterqa"],
