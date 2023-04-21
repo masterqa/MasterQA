@@ -127,7 +127,8 @@ class __MasterQATestCase__(BaseCase):
             get_jqc = None
             try:
                 get_jqc = self.execute_script("return jconfirm")
-                get_jqc = get_jqc["instances"]
+                if get_jqc is None:
+                    raise Exception("jconfirm did not load")
                 use_jqc = True
             except Exception:
                 use_jqc = False
