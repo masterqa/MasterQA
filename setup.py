@@ -61,7 +61,7 @@ if sys.argv[-1] == "publish":
 
 setup(
     name="masterqa",
-    version="1.8.2",
+    version="1.8.3",
     description="Automation-Assisted Manual Testing - https://masterqa.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
