@@ -61,7 +61,7 @@ if sys.argv[-1] == "publish":
 
 setup(
     name="masterqa",
-    version="1.8.2",
+    version="1.8.3",
     description="Automation-Assisted Manual Testing - https://masterqa.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -73,8 +73,8 @@ setup(
     license="MIT",
     python_requires=">=3.6",
     install_requires=[
-        "seleniumbase>=4.14.1",
-        "pdbp>=1.3.1",
+        "seleniumbase>=4.15.3",
+        "pdbp>=1.4.0",
         "tabcompleter>=1.2.0",
         "sbvirtualdisplay>=1.2.0",
     ],
