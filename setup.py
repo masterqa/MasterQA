@@ -28,14 +28,14 @@ if sys.argv[-1] == "publish":
     reply = str(input_method(
         ">>> Confirm release PUBLISH to PyPI? (yes/no): ")).lower().strip()
     if reply == "yes":
+        if sys.version_info < (3, 9):
+            print("\nERROR! Publishing to PyPI requires Python>=3.9")
+            sys.exit()
         print("\n*** Checking code health with flake8:\n")
-        if sys.version_info >= (3, 9):
-            os.system("python -m pip install 'flake8==6.0.0'")
-        else:
-            os.system("python -m pip install 'flake8==5.0.4'")
+        os.system("python -m pip install 'flake8==6.0.0'")
         flake8_status = os.system("flake8 --exclude=recordings,temp")
         if flake8_status != 0:
-            print("\nWARNING! Fix flake8 issues before publishing to PyPI!\n")
+            print("\nERROR! Fix flake8 issues before publishing to PyPI!\n")
             sys.exit()
         else:
             print("*** No flake8 issues detected. Continuing...")
@@ -46,6 +46,8 @@ if sys.argv[-1] == "publish":
         os.system("python -m pip install --upgrade 'build>=0.10.0'")
         print("\n*** Installing pkginfo: *** (Required for PyPI uploads)\n")
         os.system("python -m pip install --upgrade 'pkginfo>=1.9.6'")
+        print("\n*** Installing readme-renderer: *** (For PyPI uploads)\n")
+        os.system("python -m pip install --upgrade 'readme-renderer>=40.0'")
         print("\n*** Installing twine: *** (Required for PyPI uploads)\n")
         os.system("python -m pip install --upgrade 'twine>=4.0.2'")
         print("\n*** Installing tqdm: *** (Required for PyPI uploads)\n")
@@ -61,7 +63,7 @@ if sys.argv[-1] == "publish":
 
 setup(
     name="masterqa",
-    version="1.8.3",
+    version="1.8.4",
     description="Automation-Assisted Manual Testing - https://masterqa.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -73,9 +75,9 @@ setup(
     license="MIT",
     python_requires=">=3.6",
     install_requires=[
-        "seleniumbase>=4.15.3",
-        "pdbp>=1.4.0",
-        "tabcompleter>=1.2.0",
+        "seleniumbase>=4.15.5",
+        "pdbp>=1.4.1",
+        "tabcompleter>=1.2.1",
         "sbvirtualdisplay>=1.2.0",
     ],
     packages=["masterqa"],
