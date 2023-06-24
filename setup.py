@@ -75,9 +75,9 @@ setup(
     license="MIT",
     python_requires=">=3.6",
     install_requires=[
-        "seleniumbase>=4.15.3",
-        "pdbp>=1.4.0",
-        "tabcompleter>=1.2.0",
+        "seleniumbase>=4.15.5",
+        "pdbp>=1.4.1",
+        "tabcompleter>=1.2.1",
         "sbvirtualdisplay>=1.2.0",
     ],
     packages=["masterqa"],
