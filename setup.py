@@ -81,12 +81,12 @@ setup(
     author_email="mdmintz@gmail.com",
     maintainer="Michael Mintz",
     license="MIT",
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     install_requires=[
-        "seleniumbase>=4.17.14",
-        "pdbp>=1.4.6",
-        "tabcompleter>=1.2.1",
-        "sbvirtualdisplay>=1.2.0",
+        "seleniumbase>=4.21.7",
+        "pdbp>=1.5.0",
+        "tabcompleter>=1.3.0",
+        "sbvirtualdisplay>=1.3.0",
     ],
     packages=["masterqa"],
     entry_points={
