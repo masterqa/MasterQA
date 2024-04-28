@@ -135,8 +135,8 @@ def test_browser_launcher(testdir):
         from seleniumbase import get_driver
         def test_browser_launcher():
             success = False
+            driver = get_driver("chrome", headless=True)
             try:
-                driver = get_driver("chrome", headless=True)
                 driver.get("data:text/html,<p>Data URL</p>")
                 source = driver.page_source
                 assert "Data URL" in source
@@ -158,8 +158,8 @@ def test_framework_components(testdir):
         from seleniumbase import page_actions
         def test_framework_components():
             success = False
+            driver = get_driver("chrome", headless=True)
             try:
-                driver = get_driver("chrome", headless=True)
                 driver.get('data:text/html,<h1 class="top">Data URL</h2>')
                 source = driver.page_source
                 assert "Data URL" in source
