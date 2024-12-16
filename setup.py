@@ -32,7 +32,7 @@ if sys.argv[-1] == "publish":
             print("\nERROR! Publishing to PyPI requires Python>=3.9")
             sys.exit()
         print("\n*** Checking code health with flake8:\n")
-        os.system("python -m pip install 'flake8==6.1.0'")
+        os.system("python -m pip install 'flake8==7.1.1'")
         flake8_status = os.system("flake8 --exclude=recordings,temp")
         if flake8_status != 0:
             print("\nERROR! Fix flake8 issues before publishing to PyPI!\n")
@@ -45,7 +45,7 @@ if sys.argv[-1] == "publish":
         print("\n*** Installing build: *** (Required for PyPI uploads)\n")
         os.system("python -m pip install --upgrade 'build'")
         print("\n*** Installing pkginfo: *** (Required for PyPI uploads)\n")
-        os.system("python -m pip install --upgrade 'pkginfo'")
+        os.system("python -m pip install 'pkginfo'")
         print("\n*** Installing readme-renderer: *** (For PyPI uploads)\n")
         os.system("python -m pip install --upgrade 'readme-renderer'")
         print("\n*** Installing jaraco.classes: *** (For PyPI uploads)\n")
@@ -71,7 +71,7 @@ if sys.argv[-1] == "publish":
 
 setup(
     name="masterqa",
-    version="1.9.1",
+    version="1.10.0",
     description="Automation-Assisted Manual Testing - https://masterqa.com",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -81,11 +81,11 @@ setup(
     author_email="mdmintz@gmail.com",
     maintainer="Michael Mintz",
     license="MIT",
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=[
-        "seleniumbase>=4.25.3",
-        "pdbp>=1.5.0",
-        "tabcompleter>=1.3.0",
+        "seleniumbase>=4.33.11",
+        "pdbp>=1.6.1",
+        "tabcompleter>=1.4.0",
         "sbvirtualdisplay>=1.3.0",
     ],
     packages=["masterqa"],
