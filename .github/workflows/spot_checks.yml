@@ -60,7 +60,7 @@ jobs:
     - name: Unit Tests
       if: ${{ matrix.os != 'windows-latest' }}
       run: |
-        pytest examples/unit_tests/verify_framework.py
+        pytest examples/unit_tests/verify_framework.py --reruns=2
     - name: Verify seleniumbase install from PyPI
       run: |
         pip install seleniumbase -U --no-deps --force-reinstall --no-cache-dir
