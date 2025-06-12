@@ -52,10 +52,6 @@ if sys.argv[-1] == "publish":
         os.system("python -m pip install --upgrade 'jaraco.classes'")
         print("\n*** Installing more-itertools: *** (For PyPI uploads)\n")
         os.system("python -m pip install --upgrade 'more-itertools'")
-        print("\n*** Installing zipp: *** (Required for PyPI uploads)\n")
-        os.system("python -m pip install --upgrade 'zipp'")
-        print("\n*** Installing importlib-metadata: *** (For PyPI uploads)\n")
-        os.system("python -m pip install --upgrade 'importlib-metadata'")
         print("\n*** Installing keyring, requests-toolbelt: *** (For PyPI)\n")
         os.system("python -m pip install --upgrade keyring requests-toolbelt")
         print("\n*** Installing twine: *** (Required for PyPI uploads)\n")
@@ -83,10 +79,10 @@ setup(
     license="MIT",
     python_requires=">=3.8",
     install_requires=[
-        "seleniumbase>=4.33.11",
-        "pdbp>=1.6.1",
+        "seleniumbase>=4.39.4",
+        "pdbp>=1.7.0",
         "tabcompleter>=1.4.0",
-        "sbvirtualdisplay>=1.3.0",
+        "sbvirtualdisplay>=1.4.0",
     ],
     packages=["masterqa"],
     entry_points={
